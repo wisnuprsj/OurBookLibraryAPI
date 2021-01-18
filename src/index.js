@@ -213,14 +213,18 @@ app.post("/registerDomain", (req, res) => {
 });
 
 app.get("/getAllUser", (req, res) => {
-  ParaDomain.find({ domainId: "lstUser" }, (err, lstUser) => {
-    res.send(lstUser);
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(lstUser[0]);
-    }
-  });
+  try {
+    ParaDomain.find({ domainId: "lstUser" }, (err, lstUser) => {
+      res.send(lstUser);
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(lstUser[0]);
+      }
+    });
+  } catch (err) {
+    res.send(err);
+  }
 });
 
 app.post("/getSingleUser/:user", async (req, res) => {
