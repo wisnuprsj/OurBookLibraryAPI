@@ -213,8 +213,8 @@ app.post("/registerDomain", (req, res) => {
 });
 
 app.get("/getAllUser", (req, res) => {
-  res.send("Hello");
   ParaDomain.find({ domainId: "lstUser" }, (err, lstUser) => {
+    res.send(lstUser);
     if (err) {
       res.send(err);
     } else {
