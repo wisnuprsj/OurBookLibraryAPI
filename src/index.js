@@ -6,7 +6,7 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const fetch = require("node-fetch");
-import cors from "cors";
+const cors = require("cors");
 
 // IMPORT MODULE
 require("./db/mongoose");
