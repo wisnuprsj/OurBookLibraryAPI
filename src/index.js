@@ -17,14 +17,14 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 // FOR CORS MODE (ISSUE RUNNING LOCALLY AND FETCH BY REACT)
-// let allowCrossDomain = function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "*");
-//   next();
-// };
+let allowCrossDomain = function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  next();
+};
 
 // EXPRESS CONFIG
-// app.use(allowCrossDomain);
+app.use(allowCrossDomain);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
