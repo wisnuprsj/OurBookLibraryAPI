@@ -6,7 +6,6 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const fetch = require("node-fetch");
-const cors = require("cors");
 
 // IMPORT MODULE
 require("./db/mongoose");
@@ -25,7 +24,7 @@ let allowCrossDomain = function (req, res, next) {
 };
 
 // EXPRESS CONFIG
-app.use(cors());
+app.use(allowCrossDomain);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -214,18 +213,13 @@ app.post("/registerDomain", (req, res) => {
 });
 
 app.get("/getAllUser", (req, res) => {
-  try {
-    ParaDomain.find({ domainId: "lstUser" }, (err, lstUser) => {
-      res.send(lstUser);
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(lstUser[0]);
-      }
-    });
-  } catch (err) {
-    res.send(err);
-  }
+  ParaDomain.find({ domainId: "lstUser" }, (err, lstUser) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(lstUser[0]);
+    }
+  });
 });
 
 app.post("/getSingleUser/:user", async (req, res) => {
