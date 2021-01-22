@@ -6,6 +6,7 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const fetch = require("node-fetch");
+import cors from "cors";
 
 // IMPORT MODULE
 require("./db/mongoose");
@@ -24,7 +25,7 @@ let allowCrossDomain = function (req, res, next) {
 };
 
 // EXPRESS CONFIG
-app.use(allowCrossDomain);
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
