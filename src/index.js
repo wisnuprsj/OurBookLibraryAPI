@@ -144,7 +144,6 @@ app.post("/postreview", async (req, res) => {
   let data = req.body;
   let book = await Book.findOne(
     { id: data.id },
-    // "reviews",
     { strict: false },
     (err, result) => {
       if (err) {
@@ -155,11 +154,17 @@ app.post("/postreview", async (req, res) => {
     }
   );
 
+  let newData = {
+    rate: data.reviews.rate,
+    review: data.reviews.review,
+    reviewer: { fullName: data.reviews.reviewer },
+  };
+
   let newUpdate;
   if (book._doc.reviews) {
-    newUpdate = [...book._doc.reviews, data.reviews];
+    newUpdate = [...book._doc.reviews, newData];
   } else {
-    newUpdate = [data.reviews];
+    newUpdate = [newData];
   }
 
   Book.findOneAndUpdate(
